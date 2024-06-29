@@ -1,0 +1,3 @@
+.ENV*
+.DS_Store*
+sandbox/langchain-rag-demo/chroma*
