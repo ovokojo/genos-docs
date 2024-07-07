@@ -3,6 +3,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 Make sure you have [Node.js](https://nodejs.org/) (includes npm) installed on your system.
 
+## Running the app
+The run.sh script will handle the installation of dependencies and compiling the frontend.
+Make sure the run.sh script is executable by running: `chmod +x run.sh` followed by `./run.sh`.
+
 ## Available Scripts
 
 In the project directory, you can run:
