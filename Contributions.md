@@ -25,7 +25,37 @@ When submitting changes:
 - If your changes are large or significant, consider discussing them in an issue first.
 
 ## Style Guide
-TBD
+To ensure consistency and readability of the project, please use the following guidelines.
+
+### File & Directory Names
+
+**✅ Use Lowercase with Hyphens or Underscores:**
+Use lowercase letters and separate words with hyphens or underscores for directory names. 
+**Example:** `src/components`, `utils/helpers`, `test_cases`.
+
+🚫 **Avoid Camel Case:**
+Camel case (e.g., `myDirectory`) is less common for directory names and can be harder to read quickly.
+
+### File Naming Conventions
+**Script Files:** Use descriptive names for scripts.
+    -   **Example:** `deploy.sh`, `build.js`, `data_migration.py`.
+
+**Test Files:** Include `test` in the file name to clearly indicate that the file contains tests.
+    -   **Example:** `user_service_test.js`, `test_data_parser.py`.
+
+**Configuration Files:** Use consistent extensions and descriptive names
+	    - **Example:** `config.json`, `app-config.yaml`, `settings.py`.
+
+
+### Git Branch Names
+Branch names should describe the purpose of the branch clearly. This helps other contributors understand the branch's purpose at a glance. 
+
+Use lowercase letters and separate words with hyphens. Also use prefixes to indicate the type of work being done in the branch. Common prefixes include feature, bugfix, hotfix, & release.
+
+Include versioning where significant updates are required or there are parallel development needs.
+
+**Format:** `prefix/<feature-or-issue-name>-v<version>`
+**Examples:** `feature/file-upload-v1.0.0`, `bugfix/database-error`, `hotfix/database-connection`
 
 ## Community
 TBD

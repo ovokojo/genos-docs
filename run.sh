@@ -20,13 +20,13 @@ kill_port $FRONTEND_PORT
 kill_port $BACKEND_PORT
 
 # Ensure sthe run.sh scripts in the frontend and backend directories are executable
-chmod +x Frontend/app/run.sh
-chmod +x Backend/run.sh
+chmod +x frontend/app/run.sh
+chmod +x backend/run.sh
 
 # Function to run the backend Flask app
 run_backend() {
     echo "Starting Flask app..."
-    cd Backend
+    cd backend
     ./run.sh &
     cd ..
 }
@@ -34,7 +34,7 @@ run_backend() {
 # Function to run the frontend React app
 run_frontend() {
     echo "Starting React app..."
-    cd Frontend
+    cd frontend
     cd app
     ./run.sh &
     cd ..
