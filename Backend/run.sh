@@ -21,5 +21,8 @@ if [ -f "requirements.txt" ]; then
     pip install -r requirements.txt
 fi
 
+# Load environment variables from .env file
+export $(grep -v '^#' .env | xargs)
+
 # Run the Flask app
-flask --app backend run
+flask --app backend run --port ${FLASK_APP_PORT}
