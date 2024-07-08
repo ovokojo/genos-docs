@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import os
 import logging
+from werkzeug.utils import secure_filename
 
 # Initialize the Flask application
 app = Flask(__name__)
@@ -9,12 +10,19 @@ CORS(app)  # Enable CORS for all routes
 
 # Configuration for file uploads
 UPLOAD_FOLDER = 'uploads'
+ALLOWED_EXTENSIONS = {'txt', 'md'}
+MAX_CONTENT_LENGTH = 5 * 1024 * 1024  # 16MB max file size
+
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = MAX_CONTENT_LENGTH
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -24,7 +32,12 @@ def upload_file():
         file = request.files['file']
         if file.filename == '':
             return jsonify({'error': 'No selected file'}), 400
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        if not allowed_file(file.filename):
+            return jsonify({'error': 'File type not allowed'}), 400
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        if os.path.exists(file_path):
+            return jsonify({'error': 'File already exists'}), 400
         file.save(file_path)
         return jsonify({'message': 'File successfully uploaded', 'file_path': file_path})
     except Exception as e:
