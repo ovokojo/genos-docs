@@ -32,7 +32,33 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button.upload {
+  background-color: #4caf50;
+  /* Green */
+  color: white;
+}
+
+button.delete {
+  background-color: #f44336;
+  /* Red */
+  color: white;
+}
+
+button:hover {
+  opacity: 0.8;
 }
