@@ -28,6 +28,11 @@ Action items, design documents & core features.
 
 - [Langchain](https://python.langchain.com/v0.2/docs/introduction/): a framework for developing llm applications
 - [your recommendation here 😄]
+
+## Shell Scripts
+Use `./run.sh` in the root folder to run both the backend and the front end
+Use `source ./terminate.sh` then `terminate <PORT>` in the root folder to quickly terminate ports for use
+Use `./run.sh` in the backend and frontend folders to run each independently
   
 
 ## 📝 Contributing
