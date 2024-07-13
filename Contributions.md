@@ -25,7 +25,7 @@ When submitting changes:
 - If your changes are large or significant, consider discussing them in an issue first.
 
 ## Style Guide
-To ensure consistency and readability of the project, please use the following guidelines.
+To ensure consistency and readability of the project, please follow the [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html).
 
 ### File & Directory Names
 
