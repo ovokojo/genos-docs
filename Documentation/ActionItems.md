@@ -1,10 +1,14 @@
-# Action Items
-
-**July 8th 2024**
-- [ ] Add unit tests for file upload
-- [ ] Implement file processing into vector db
-- [ ] Privacy settings: select models
-
+**July 24th 2024**
+- [ ] Build UI to view & search files
+- [ ] Build UI to delete files
+- [ ] Build API to serve files
+- [ ] Build API to delete files
+- [ ] Integrate file upload API with DB
+- [ ] Build basic RAG pipeline
+- [x] Migrate UI to Flutter
+- [x] Build file upload UI
+- [x] Test file processing into vector db Llama Index
+- [x] Build DB tables for users & file upload
 
 **July 5th 2024**
 - [x] Design db schema & project folder structure
@@ -12,4 +16,3 @@
 - [x] Write short memo on mvp features we agree on.
 - [x] Create flask and react apps in GitHub repo, validate installation on Windows & Mac
 - [x] Update global readme to explain project structure and link Contributions.md file
-- [ ] Create Youtube account

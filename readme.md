@@ -17,7 +17,7 @@ Action items, design documents & core features.
 
 ## Frontend
 
-[React](https://react.dev/): A library for web interfaces
+[Flutter](https://flutter.dev/): An open source framework by Google for building beautiful, natively compiled, multi-platform apps.
 
  
 ## Backend
