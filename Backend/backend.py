@@ -1,29 +1,77 @@
-import time
-from flask import Flask
-from dotenv import load_dotenv
+from flask import Flask, request, jsonify, send_from_directory
+from flask_cors import CORS
 import os
-from flask_cors import CORS, cross_origin
+import logging
+from werkzeug.utils import secure_filename
 
-load_dotenv()
-
-# loading variables from the .env file
-FLASK_APP_PORT = os.getenv("FLASK_APP_PORT")
-
+# Initialize the Flask application
 app = Flask(__name__)
-cors = CORS(appresources={"*": {"origins": "http://localhost:3000"}})
-# app.config['CORS_HEADERS'] = 'Content-Type'
+CORS(app)  # Enable CORS for all routes
 
+# Configuration for file uploads
+UPLOAD_FOLDER = 'uploads'
+ALLOWED_EXTENSIONS = {'txt', 'md'}
+MAX_CONTENT_LENGTH = 5 * 1024 * 1024  # 16MB max file size
 
-@app.route('/time')
-@cross_origin()
-def get_current_time():
-    print(time.time())
-    return {'time': time.time()}
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = MAX_CONTENT_LENGTH
 
+# Set up logging
+logging.basicConfig(level=logging.DEBUG)
 
-@app.route('/')
-def get_default():
-    return "<p> hi this is genos docs<p>"
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-if __name__ == "__main__":
-    app.run(debug=False, port=FLASK_APP_PORT)
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    try:
+        if 'file' not in request.files:
+            return jsonify({'error': 'No file part'}), 400
+        file = request.files['file']
+        if file.filename == '':
+            return jsonify({'error': 'No selected file'}), 400
+        if not allowed_file(file.filename):
+            return jsonify({'error': 'File type not allowed'}), 400
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        if os.path.exists(file_path):
+            return jsonify({'error': 'File already exists'}), 400
+        file.save(file_path)
+        return jsonify({'message': 'File successfully uploaded', 'file_path': file_path})
+    except Exception as e:
+        logging.error(f"Error uploading file: {e}")
+        return jsonify({'error': 'Internal Server Error'}), 500
+
+@app.route('/files', methods=['GET'])
+def list_files():
+    try:
+        files = os.listdir(app.config['UPLOAD_FOLDER'])
+        return jsonify({'files': files})
+    except Exception as e:
+        logging.error(f"Error listing files: {e}")
+        return jsonify({'error': 'Internal Server Error'}), 500
+
+@app.route('/uploads/<filename>', methods=['GET'])
+def get_file(filename):
+    try:
+        return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+    except Exception as e:
+        logging.error(f"Error serving file {filename}: {e}")
+        return jsonify({'error': 'Internal Server Error'}), 500
+
+@app.route('/delete_all_files', methods=['DELETE'])
+def delete_all_files():
+    try:
+        for filename in os.listdir(app.config['UPLOAD_FOLDER']):
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+        return jsonify({'message': 'All files successfully deleted'})
+    except Exception as e:
+        logging.error(f"Error deleting files: {e}")
+        return jsonify({'error': 'Internal Server Error'}), 500
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5005)
