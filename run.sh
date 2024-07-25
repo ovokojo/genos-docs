@@ -2,7 +2,7 @@
 
 # Ensures the scripts in the frontend and backend directories are executable
 chmod +x ./terminate.sh
-chmod +x frontend/app/run.sh
+chmod +x frontend/run.sh
 chmod +x backend/run.sh
 
 # Ports to be used by the frontend and backend
@@ -30,11 +30,9 @@ run_backend() {
 
 # Function to run the frontend React app
 run_frontend() {
-    echo "Starting React app..."
+    echo "Starting Flutter app..."
     cd frontend
-    cd app
     ./run.sh &
-    cd ..
 }
 
 # Run backend first, then frontend
