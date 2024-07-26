@@ -28,7 +28,7 @@ run_backend() {
     cd ..
 }
 
-# Function to run the frontend React app
+# Function to run the frontend Flutter app
 run_frontend() {
     echo "Starting Flutter app..."
     cd frontend

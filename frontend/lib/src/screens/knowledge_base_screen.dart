@@ -3,8 +3,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:convert';
-import '../widgets/file_list_item.dart';
-import '../models/file_model.dart';
+import '../widgets/document_list_item.dart';
+import '../models/document.dart';
 import '../services/file_service.dart';
 
 class KnowledgeBaseScreen extends StatefulWidget {
@@ -16,7 +16,7 @@ class KnowledgeBaseScreen extends StatefulWidget {
 
 class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
   final FileService _fileService = FileService();
-  List<FileModel> _files = [];
+  List<Document> _files = [];
   String _searchQuery = '';
   bool _isUploading = false;
 
@@ -27,7 +27,7 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
   }
 
   void _loadFiles() async {
-    final files = await _fileService.getFiles();
+    final files = await _fileService.getDocuments();
     setState(() {
       _files = files;
     });
@@ -39,9 +39,9 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
     });
   }
 
-  List<FileModel> get _filteredFiles {
+  List<Document> get _filteredFiles {
     return _files
-        .where((file) => file.name.toLowerCase().contains(_searchQuery.toLowerCase()))
+        .where((file) => file.fileName.toLowerCase().contains(_searchQuery.toLowerCase()))
         .toList();
   }
 
@@ -157,7 +157,7 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
             child: ListView.builder(
               itemCount: _filteredFiles.length,
               itemBuilder: (context, index) {
-                return FileListItem(file: _filteredFiles[index]);
+                return DocumentListItem(file: _filteredFiles[index]);
               },
             ),
           ),
@@ -171,11 +171,11 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Upload Error'),
+          title: const Text('Upload Error'),
           content: Text(errorMessage),
           actions: <Widget>[
             TextButton(
-              child: Text('OK'),
+              child: const Text('OK'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
