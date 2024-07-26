@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/date_service.dart';
 import '../models/document.dart';
 
 class DocumentListItem extends StatelessWidget {
@@ -10,7 +11,7 @@ class DocumentListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(file.fileName),
-      subtitle: Text('Uploaded by: ${file.createdBy}'),
+      subtitle: Text('Uploaded on: ${formatDateLong(file.createdDate)}'),
       trailing: Text(file.fileSize.toString()),
       onTap: () {
         // Handle file tap

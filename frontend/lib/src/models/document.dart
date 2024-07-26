@@ -9,8 +9,8 @@ class Document {
   final String? status;
   final DateTime? uploadDate;
   final DateTime? lastAccessDate;
-  final String? createdBy; // currently int in DB. awaiting decision
-  final DateTime? createdDate;
+  final int? createdBy;
+  final DateTime createdDate;
   final DateTime? lastModifiedDate;
   final String? tags;
   final int? version;
@@ -31,7 +31,7 @@ class Document {
     this.uploadDate,
     this.lastAccessDate,
     this.createdBy,
-    this.createdDate,
+    required this.createdDate,
     this.lastModifiedDate,
     this.tags,
     this.version,
@@ -54,7 +54,7 @@ class Document {
       uploadDate: map['uploadDate'] != null ? DateTime.parse(map['uploadDate']) : null,
       lastAccessDate: map['lastAccessDate'] != null ? DateTime.parse(map['lastAccessDate']) : null,
       createdBy: map['createdBy'],
-      createdDate: map['createdDate'] != null ? DateTime.parse(map['createdDate']) : null,
+      createdDate: DateTime.parse(map['createdDate']),
       lastModifiedDate:
           map['lastModifiedDate'] != null ? DateTime.parse(map['lastModifiedDate']) : null,
       tags: map['tags'],
