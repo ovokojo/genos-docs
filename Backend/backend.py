@@ -3,12 +3,16 @@ from flask_cors import CORS
 import os
 import logging
 from werkzeug.utils import secure_filename
+from db_connector import init_db
 from upload_file import upload_blueprint
 from config import UPLOAD_FOLDER, ALLOWED_EXTENSIONS, MAX_FILE_SIZE
 
 # Initialize the Flask application
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
+
+# Initialize the database
+init_db()
 
 # Register the Blueprint
 app.register_blueprint(upload_blueprint)
