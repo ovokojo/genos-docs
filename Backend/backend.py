@@ -3,20 +3,24 @@ from flask_cors import CORS
 import os
 import logging
 from werkzeug.utils import secure_filename
+from db_connector import init_db
+from upload_file import upload_blueprint
+from config import UPLOAD_FOLDER, ALLOWED_EXTENSIONS, MAX_FILE_SIZE
 
 # Initialize the Flask application
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
-# Configuration for file uploads
-UPLOAD_FOLDER = 'uploads'
-ALLOWED_EXTENSIONS = {'txt', 'md'}
-MAX_CONTENT_LENGTH = 5 * 1024 * 1024  # 16MB max file size
+# Initialize the database
+init_db()
+
+# Register the Blueprint
+app.register_blueprint(upload_blueprint)
 
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = MAX_CONTENT_LENGTH
+app.config['MAX_FILE_SIZE'] = MAX_FILE_SIZE
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
