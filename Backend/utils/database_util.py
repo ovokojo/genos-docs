@@ -2,7 +2,7 @@ import sqlite3
 import os
 from dotenv import load_dotenv
 from datetime import datetime
-from config import DB_FILE
+from config.file_upload_config import DB_FILE
 
 # Load environment variables
 load_dotenv()
@@ -13,61 +13,24 @@ DB_FILE = os.getenv("DB_FILE", "db.sqlite")
 def init_db():
     conn = create_db_connection()
     if conn:
-        create_users_table_query = """
-        CREATE TABLE IF NOT EXISTS Users (
-            userId INTEGER PRIMARY KEY,
-            organizationId INTEGER,
-            role TEXT,
-            firstName TEXT,
-            lastName TEXT,
-            email TEXT,
-            status TEXT,
-            lastLoginDate TEXT,
-            createdBy INTEGER,
-            createdDate TEXT,
-            lastModifiedDate TEXT
-        );
-        """
-
         create_documents_table_query = """
         CREATE TABLE IF NOT EXISTS Documents (
-            documentId INTEGER PRIMARY KEY,
-            userId INTEGER,
+            documentId TEXT PRIMARY KEY,
             fileName TEXT,
-            filePath TEXT,
             fileSize INTEGER,
-            description TEXT,
-            contentType TEXT,
-            status TEXT,
+            fileType TEXT,
             uploadDate TEXT,
-            lastAccessDate TEXT,
-            createdBy INTEGER,
-            createdDate TEXT,
-            lastModifiedDate TEXT,
-            tags TEXT,
-            version INTEGER,
-            accessLevel TEXT,
-            processingStatus TEXT,
-            processingStartDate TEXT,
-            processingEndDate TEXT,
-            FOREIGN KEY (userId) REFERENCES Users(userId)
         );
         """
         # Add example data to test the schema
-        add_example_user_data_query = """
-        INSERT INTO Users (userId, organizationId, role, firstName, lastName, email, status, lastLoginDate, createdBy, createdDate, lastModifiedDate) 
-        VALUES (1, 1, 'admin', 'John', 'Doe', 'john.doe@example.com', 'active', '2024-07-22 10:00:00', 1, '2024-07-22 09:00:00', '2024-07-22 09:00:00');
-        """
-
         add_example_document_data_query = """
-        INSERT INTO Documents (documentId, userId, fileName, filePath, fileSize, description, contentType, status, uploadDate, lastAccessDate, createdBy, createdDate, lastModifiedDate, tags, version, accessLevel, processingStatus, processingStartDate, processingEndDate) 
-        VALUES (1, 1, 'example.txt', '/path/to/example.txt', 1234, 'An example text file.', 'txt', 'uploaded', '2024-07-22 09:00:00', '2024-07-22 09:15:00', 1, '2024-07-22 09:00:00', '2024-07-22 09:00:00', 'example, test', 1, 'public', 'not started', NULL, NULL);
+        INSERT INTO Documents (documentId, userId, fileName, fileSize, fileType, status, uploadDate) VALUES
+        ('af2d8ee5-962d-416c-ab8d-a2c0604cd4c8', 'd9f3548c-abb5-4c2e-b896-3a929dc49edc.txt', 1024000, 'txt', '2024-07-15'),
+        ('9db4745d-64db-45fe-81dd-fe4b2309f814', '60bb3f86-20bf-4e1d-a128-63c766381d00.txt', 2048000, 'txt', '2024-07-16'),
+        ('deb711a8-a2f9-45fa-96a2-97fda9df2881', '4b59f797-850e-4e76-8743-07aaf9ed5ac2.txt', 512000, 'text', '2024-07-17');
         """
-
         # Execute each query
-        execute_query(conn, create_users_table_query)
         execute_query(conn, create_documents_table_query)
-        execute_query(conn, add_example_user_data_query)
         execute_query(conn, add_example_document_data_query)
 
         conn.close()
