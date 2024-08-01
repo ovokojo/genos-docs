@@ -4,6 +4,7 @@ import os
 import logging
 from utils.database_util import init_db
 from routes.upload_file import upload_blueprint
+from routes.get_files import get_files_blueprint
 from config.file_upload_config import UPLOAD_FOLDER, MAX_FILE_SIZE
 
 # Initialize the Flask application
@@ -15,6 +16,7 @@ init_db()
 
 # Register the Blueprint
 app.register_blueprint(upload_blueprint)
+app.register_blueprint(get_files_blueprint)
 
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
