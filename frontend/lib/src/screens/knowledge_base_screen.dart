@@ -24,7 +24,7 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
   }
 
   void _loadFiles() async {
-    final files = await _fileService.getFiles();
+    final files = await _fileService.getDocuments();
     setState(() {
       _files = files;
     });
@@ -96,7 +96,7 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
             child: ListView.builder(
               itemCount: _filteredFiles.length,
               itemBuilder: (context, index) {
-                return FileListItem(file: _filteredFiles[index]);
+                return DocumentListItem(file: _filteredFiles[index]);
               },
             ),
           ),

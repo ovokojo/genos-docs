@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import '../services/date_service.dart';
 import '../models/document.dart';
 
-class FileListItem extends StatelessWidget {
+class DocumentListItem extends StatelessWidget {
   final Document file;
 
-  const FileListItem({super.key, required this.file});
+  const DocumentListItem({super.key, required this.file});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(file.fileName),
-      subtitle: Text(file.fileSize),
-      trailing: Text(file.uploadDate),
+      subtitle: Text('Uploaded on: ${formatDateLong(file.createdDate)}'),
+      trailing: Text(file.fileSize.toString()),
       onTap: () {
         // Handle file tap
       },
