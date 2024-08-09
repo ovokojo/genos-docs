@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import '../models/file_model.dart';
+import '../models/document.dart';
 
 class FileListItem extends StatelessWidget {
-  final FileModel file;
+  final Document file;
 
   const FileListItem({super.key, required this.file});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(file.name),
-      subtitle: Text('Uploaded by: ${file.uploadedBy}'),
-      trailing: Text(file.fileSize),
+      title: Text(file.fileName),
+      subtitle: Text(file.fileSize),
+      trailing: Text(file.uploadDate),
       onTap: () {
         // Handle file tap
       },
