@@ -1,7 +1,7 @@
 class Document {
   final String documentId;
   final String fileName;
-  final String fileSize;
+  final int fileSize;
   final String fileType;
   final String uploadDate;
 
@@ -15,11 +15,11 @@ class Document {
 
   factory Document.fromJson(Map<String, dynamic> json) {
     return Document(
-      documentId: json['document_id'],
-      fileName: json['file_name'],
-      fileSize: json['file_size'],
-      fileType: json['file_type'],
-      uploadDate: json['upload_date'],
+      documentId: json['documentId'] as String,
+      fileName: json['fileName'] as String,
+      fileSize: json['fileSize'] as int,
+      fileType: json['fileType'] as String,
+      uploadDate: json['uploadDate'] as String,
     );
   }
 }

@@ -13,11 +13,13 @@ class FileService {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
-        final List<dynamic> filesData = data['files'];
-        print('files: $filesData');
-        return filesData.map((fileData) => Document.fromJson(fileData)).toList();
+        final List<dynamic> filesData = data['files'] as List<dynamic>? ?? [];
+
+        return filesData
+            .map((fileData) => Document.fromJson(fileData as Map<String, dynamic>))
+            .toList();
       } else {
-        throw Exception('Failed to load files');
+        throw Exception('Failed to load files: ${response.statusCode}');
       }
     } catch (e) {
       throw Exception('Error fetching files: $e');
