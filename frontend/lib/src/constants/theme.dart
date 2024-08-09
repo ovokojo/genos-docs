@@ -4,83 +4,56 @@ import 'colors.dart';
 class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
-      primaryColor: AppColors.lightPrimary,
-      scaffoldBackgroundColor: AppColors.lightBackground,
+      primaryColor: AppColors.primary,
+      scaffoldBackgroundColor: AppColors.background,
       appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.lightBackground,
-        foregroundColor: AppColors.lightText,
+        backgroundColor: AppColors.background,
+        foregroundColor: AppColors.primary,
       ),
       textTheme: const TextTheme(
-        bodyLarge: TextStyle(color: AppColors.lightText),
-        bodyMedium: TextStyle(color: AppColors.lightText),
+        bodyLarge: TextStyle(color: AppColors.primary),
+        bodyMedium: TextStyle(color: AppColors.primary),
       ),
       iconTheme: const IconThemeData(
-        color: AppColors.lightPrimary,
+        color: AppColors.primary,
       ),
       buttonTheme: ButtonThemeData(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        buttonColor: AppColors.lightPrimary,
+        buttonColor: AppColors.primary,
         textTheme: ButtonTextTheme.primary,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          foregroundColor: AppColors.lightTextLight,
-          backgroundColor: AppColors.lightPrimary,
+          foregroundColor: AppColors.background,
+          backgroundColor: AppColors.primary,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         ),
       ),
+      listTileTheme: ListTileThemeData(
+        tileColor: AppColors.background,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+      drawerTheme:
+          DrawerThemeData(elevation: 0, backgroundColor: AppColors.secondary.withOpacity(0.1)),
       inputDecorationTheme: InputDecorationTheme(
-        hintStyle: TextStyle(color: AppColors.lightText.withOpacity(0.6)),
-        fillColor: AppColors.lightBackground,
+        hintStyle: TextStyle(color: AppColors.primary.withOpacity(0.6)),
+        fillColor: AppColors.background,
         filled: true,
         border: const OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.lightPrimary),
+          borderSide: BorderSide(color: AppColors.primary),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.lightPrimary.withOpacity(0.5)),
+          borderSide: BorderSide(color: AppColors.primary.withOpacity(0.5)),
         ),
         focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.lightPrimary, width: 2),
+          borderSide: BorderSide(color: AppColors.primary, width: 2),
         ),
-        prefixIconColor: AppColors.lightPrimary,
+        prefixIconColor: AppColors.primary,
       ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(
-        color: AppColors.lightPrimary,
-      ),
-      // Add more theme properties as needed
-    );
-  }
-
-  static ThemeData get darkTheme {
-    return ThemeData(
-      primaryColor: AppColors.darkPrimary,
-      scaffoldBackgroundColor: AppColors.darkBackground,
-      appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.darkPrimary,
-        foregroundColor: AppColors.darkText,
-      ),
-      textTheme: const TextTheme(
-        bodyLarge: TextStyle(color: AppColors.darkText),
-        bodyMedium: TextStyle(color: AppColors.darkText),
-      ),
-      iconTheme: const IconThemeData(
-        color: AppColors.darkPrimary,
-      ),
-      inputDecorationTheme: InputDecorationTheme(
-        hintStyle: TextStyle(color: AppColors.darkText.withOpacity(0.6)),
-        fillColor: AppColors.darkBackground,
-        filled: true,
-        border: const OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.darkPrimary),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.darkPrimary.withOpacity(0.5)),
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.darkPrimary, width: 2),
-        ),
-        prefixIconColor: AppColors.darkPrimary,
+        color: AppColors.primary,
       ),
       // Add more theme properties as needed
     );

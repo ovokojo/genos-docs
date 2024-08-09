@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genosdocs_ui/src/constants/colors.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_state.dart';
 
@@ -23,13 +24,17 @@ class CustomDrawer extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: theme.primaryColor,
                     ),
-                    child: const Text('Genos Docs'),
+                    child: const Text('Genos Docs',
+                        style: TextStyle(
+                          color: AppColors.background,
+                        )),
                   ),
                 ),
-                _buildDrawerItem(context, 'Dashboard', 0),
+                // _buildDrawerItem(context, 'Dashboard', 0),
                 _buildDrawerItem(context, 'Knowledge Base', 1),
-                _buildDrawerItem(context, 'Analytics', 2),
-                _buildDrawerItem(context, 'Settings', 3),
+                // TODO: Chat page
+                // _buildDrawerItem(context, 'Analytics', 2),
+                // _buildDrawerItem(context, 'Settings', 3),
               ],
             ),
           ),
