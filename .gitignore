@@ -1,6 +1,5 @@
 .ENV*
 .DS_Store*
-sandbox/langchain-rag-demo/chroma*
 
 # Virtualenv
 .venv/
@@ -9,3 +8,6 @@ ENV/
 env/
 venv.bak/
 venv.bk/
+
+#storage
+storage/   
