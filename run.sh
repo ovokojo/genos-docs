@@ -1,43 +1,49 @@
 #!/bin/bash
 
-# Ensures the scripts in the frontend and backend directories are executable
-chmod +x ./terminate.sh
-chmod +x frontend/run.sh
-chmod +x backend/run.sh
+# Set the virtual environment name
+VENV_NAME="venv"
 
-# Ports to be used by the frontend and backend
-FRONTEND_PORT=3000
-BACKEND_PORT=$(grep FLASK_APP_PORT backend/.env | cut -d '=' -f2)
+# Check if virtual environment exists
+if [ ! -d "$VENV_NAME" ]; then
+    echo "Creating virtual environment..."
+    python3 -m venv $VENV_NAME
+fi
 
-# Terminate any processes using the frontend and backend ports
-if [ -f "./terminate.sh" ]; then
-    echo "Terminating ports..."
-    source ./terminate.sh
-    terminate $FRONTEND_PORT
-    terminate $BACKEND_PORT
-else
-    echo "terminate.sh not found!"
+# Activate virtual environment
+source $VENV_NAME/bin/activate
+
+# Check if activation was successful
+if [ $? -ne 0 ]; then
+    echo "Failed to activate virtual environment. Exiting."
     exit 1
 fi
 
-# Function to run the backend Flask app
-run_backend() {
-    echo "Starting Flask app..."
-    cd backend
-    ./run.sh &
-    cd ..
-}
+# Install or upgrade pip
+pip install --upgrade pip
 
-# Function to run the frontend React app
-run_frontend() {
-    echo "Starting Flutter app..."
-    cd frontend
-    ./run.sh &
-}
+# Install dependencies
+if [ -f "requirements.txt" ]; then
+    echo "Installing project dependencies..."
+    pip install -r requirements.txt
+else
+    echo "requirements.txt not found. Skipping dependency installation."
+fi
 
-# Run backend first, then frontend
-run_backend
-run_frontend
+# Install development dependencies if the file exists
+if [ -f "requirements-dev.txt" ]; then
+    echo "Installing development dependencies..."
+    pip install -r requirements-dev.txt
+else
+    echo "requirements-dev.txt not found. Skipping development dependency installation."
+fi
 
-# Wait for all background processes to finish
-wait
+# Run the Streamlit app
+echo " ______   ______"
+echo "/  ____| |  __  \\"
+echo "| |  __  | |  \\  |"
+echo "| | |_ | | |   | |"
+echo "| |__| | | |__/  |"
+echo "\\______| |______/"
+echo "Booting Genos Docs app.."
+echo
+python3 -m streamlit run app/app.py

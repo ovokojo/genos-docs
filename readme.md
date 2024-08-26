@@ -4,37 +4,49 @@
 
 We are developing open-source infrastructure to simplify the creation of chat interfaces for proprietary data. 
 
-Our vision is a future where organizations can effortlessly upload their data, configure privacy settings, select language models, and swiftly deploy chat interfaces tailored to their privacy and security requirements.
-
-# Project Structure
+Our vision is a future where people and organizations can effortlessly upload their data, configure privacy settings, select language models, and swiftly deploy chat interfaces tailored to their needs.
 
 
-## Documentation
+##  Application Overview
 
-Action items, design documents & core features.
+Genos Docs is a Python web app built using robust open source frameworks that enable rapid prototyping. This approach to building an intelligent search engine prioritizes speed and simplicity.
 
-  
+### Core Technologies
+- [Python](https://www.python.org/): The primary programming language used for both frontend and backend.
+-  [Streamlit](https://streamlit.io/): A faster way to build & share data apps.
+- [LlamaIndex](https://www.llamaindex.ai/): A data framework for LLM-based applications to ingest, structure, and access private or domain-specific data.
+- [Chroma](https://docs.trychroma.com/): An AI-native vector database.
 
-## Frontend
+## Getting Started
 
-[Flutter](https://flutter.dev/): An open source framework by Google for building beautiful, natively compiled, multi-platform apps.
-
- 
-## Backend
-
- - [Flask](https://flask.palletsprojects.com/en/3.0.x/#): a micro web framework written in Python
-
-- [Chroma](https://docs.trychroma.com/): an ai-native vector database.
-
-- [Langchain](https://python.langchain.com/v0.2/docs/introduction/): a framework for developing llm applications
-- [your recommendation here 😄]
+1. Ensure you have Python 3.12 or later installed on your system.
+2. Clone the repository.
+3. Install dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
+4. Run the Streamlit app:
+   ```
+   streamlit run app.py
+   ```
 
 ## Shell Scripts
-Use `./run.sh` in the root folder to run both the backend and the front end
-Use `source ./terminate.sh` then `terminate <PORT>` in the root folder to quickly terminate ports for use
-Use `./run.sh` in the backend and frontend folders to run each independently
-  
+
+- Use `./run.sh` in the root folder to run the Streamlit app
 
 ## 📝 Contributing
 
-- See `Contributions.md` file for details
+- See `CONTRIBUTIONS.md` file for details on how to contribute to this project.
+
+## Troubleshooting
+
+If you encounter type-related errors or unexpected behavior, please ensure you're using Python 3.12 or later. Earlier versions, especially Python 3.10 and below, may not be fully compatible with all features used in this project.
+
+## Future Developments
+
+We're continuously working on improving Genos Docs. Future updates may include:
+- Enhanced privacy settings
+- Support for multiple language models
+- Improved data ingestion and processing capabilities
+
+Stay tuned for more updates!
